@@ -1,8 +1,8 @@
-aaaaaaaa = ["Steak", "Noodle", "Orange", "Beer"]
+aaaaaaaa = ["pork steak", "noodle", "orange", "sapporo beer"].sort.reverse
 
 1.upto(10) do
 	aaaaaaaa.each do |bbbbbbb|
-		puts bbbbbbb.downcase + "!" + "good".upcase.capitalize
+		puts bbbbbbb.capitalize + "!." + "good".upcase.capitalize + ".$"
 	end
 end
 
