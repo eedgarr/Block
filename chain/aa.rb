@@ -1,7 +1,6 @@
 require 'sinatra'
  
 
-
-get '/blockchain' do
+get '/block' do
    '<h1>I will make a block chain.<h1>'
 end
