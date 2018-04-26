@@ -1,3 +1,4 @@
+require 'digest'
 
 class BlockChain
 	def initialize
@@ -8,9 +9,10 @@ class BlockChain
 		@number_of_blocks = @number_of_blocks + 1
 		history = []
 		begin
-			nonce = rand(1000)
+			nonce = rand(10000000)
+			hashed = Digest::SHA256.hexdigest(nonce.to_s)
 			history << nonce
-		end while nonce != 0
+		end while hashed[0..4] != '00000'
 		history
 	end
 
