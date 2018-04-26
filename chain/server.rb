@@ -4,9 +4,10 @@ require './block'
 b = BlockChain.new
 
 get '/' do
-   "Total number of blocks : " + b.my_blocks.to_s
+  b.current_chain.to_s
 end
 
 get '/mine' do
-   b.mining.to_s
+	b.mining
+   "Mined"
 end
