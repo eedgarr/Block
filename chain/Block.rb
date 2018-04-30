@@ -1,4 +1,4 @@
-
+require 'securerandom'
 require 'digest'
 
 class BlockChain
@@ -6,16 +6,23 @@ class BlockChain
 	def initialize
 		@number_of_blocks = 1
 		@chain = []
+		@transaction =[]
+		@wallet = {}
 	end
 
+	def make_a_wallet
+		new_wallet_address = SecureRandom.uuid
+		@wallet[new_wallet_address] = 1000
+		@wallet
+	end
 
-	def trans(s, r, a)
-		transaction = {
+	def trans(s, r, a) #줄임말
+		t = {
 			"sender" => s,
 			"receiver" => r,
 			"amount" => a
 		}
-		@transaction << transaction
+		@transaction << t
 	end
 
 
@@ -26,14 +33,16 @@ class BlockChain
 			nonce = rand(10000000)
 			hashed = Digest::SHA256.hexdigest(nonce.to_s)
 			history << nonce
-		end while hashed[0..4] != '00000'
+		end while hashed[0..3] != '0000'
 
 		block = {
 			'index' => @chain.length + 1,
 			'time' => Time.now,
 			'nonce' => nonce,
-			'previous_block' => Digest::SHA256.hexdigest(last_block.to_s)	
+			'previous_block' => Digest::SHA256.hexdigest(last_block.to_s),
+			"transaction" => @transaction
 		} 
+		@transaction = []
 		@chain << block
 	end
 
