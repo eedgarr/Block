@@ -8,6 +8,12 @@ class BlockChain
 		@chain = []
 	end
 
+	def trans(s, r, a)
+		puts s
+		puts r
+		puts a
+	end
+
 	def mining
 		@number_of_blocks = @number_of_blocks + 1
 		history = []

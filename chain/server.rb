@@ -24,4 +24,5 @@ end
 
 get '/transaction' do
 	"보내는 사람:" + params["sender"] + "받는 사람:" + params["receiver"]
+	b.trans(params["sender"], params["receiver"], params["amount"])
 end	
