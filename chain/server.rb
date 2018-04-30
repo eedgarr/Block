@@ -18,6 +18,9 @@ get '/' do
 end
 
 get '/mine' do
-	b.mining
-   "Mined!!"
+	b.mining.to_s
+end
+
+get '/transaction' do
+	"보내는 사람:" + params["sender"] + "받는 사람:" + params["receiver"]
 end
