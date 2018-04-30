@@ -19,13 +19,9 @@ class BlockChain
 	def trans(s, r, a) #줄임말
 		if @wallet[s].nil?
 			"없는 지갑입니다."
-		end
-
-		if @wallet[r].nil?
+		elsif @wallet[r].nil?
 			"없는 지갑입니다."
-		end
-
-		if @wallet[s] < a
+		elsif @wallet[s].to_f < a.to_f
 			"잔액이 부족합니다."
 		else
 
@@ -34,9 +30,15 @@ class BlockChain
 			"receiver" => r,
 			"amount" => a
 		}
+		@wallet[r] = @wallet[r] + a.to_f
+		@wallet[s] = @wallet[s] - a.to_f
 		@transaction << t
 		"거래가 완료되었습니다."
 		end
+	end
+
+	def show_all_wallet
+		@wallet
 	end
 
 
