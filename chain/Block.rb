@@ -1,4 +1,4 @@
-@@ -1,23 +1,31 @@
+
 require 'digest'
 
 class BlockChain
@@ -8,11 +8,16 @@ class BlockChain
 		@chain = []
 	end
 
+
 	def trans(s, r, a)
-		puts s
-		puts r
-		puts a
+		transaction = {
+			"sender" => s,
+			"receiver" => r,
+			"amount" => a
+		}
+		@transaction << transaction
 	end
+
 
 	def mining
 		@number_of_blocks = @number_of_blocks + 1
@@ -22,9 +27,6 @@ class BlockChain
 			hashed = Digest::SHA256.hexdigest(nonce.to_s)
 			history << nonce
 		end while hashed[0..4] != '00000'
-		history
-			nonce = rand(100)
-		end while nonce != 0
 
 		block = {
 			'index' => @chain.length + 1,
@@ -35,12 +37,15 @@ class BlockChain
 		@chain << block
 	end
 
+
 	def current_chain
 		@chain
 	end
 
 	def my_blocks
 		@number_of_blocks
+	end
+
 	def last_block
 		@chain[-1]
 	end
