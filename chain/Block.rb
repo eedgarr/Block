@@ -1,6 +1,7 @@
 require 'securerandom'
 require 'digest'
 require 'httparty'
+require 'jason'
 
 class BlockChain
 
@@ -77,7 +78,12 @@ class BlockChain
 	end
 
 	def get_other_blocks
-		HTTParty.get("http://localhost:4568/total_blocks").body
+		@node.each do |n|
+			other_blocks = HTTParty.get("http://localhost:" + n.to_s + "/total_blocks").body
+			if @chain.size < other_blocks.to_i
+				@chain = []
+			end
+		end
 	end
 
 	def add_node(node)

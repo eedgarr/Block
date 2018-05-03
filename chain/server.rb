@@ -48,6 +48,6 @@ get '/register' do
 end
 
 get '/my_nodes' do
-  b.total_nodes.to_s
+	b.total_nodes.to_s
 end
 
