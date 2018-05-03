@@ -1,7 +1,7 @@
 require 'securerandom'
 require 'digest'
 require 'httparty'
-require 'jason'
+require 'json'
 
 class BlockChain
 
@@ -81,7 +81,7 @@ class BlockChain
 		@node.each do |n|
 			other_blocks = HTTParty.get("http://localhost:" + n.to_s + "/total_blocks").body
 			if @chain.size < other_blocks.to_i
-				@chain = []
+				HTTParty.get("http://localhost:" + n.to_s + "/get_blocks?blocks=" + @chain.to_json)
 			end
 		end
 	end
