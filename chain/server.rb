@@ -35,4 +35,19 @@ get '/all_wallet' do
 	b.show_all_wallet.to_s
 end
 
+get '/total_blocks' do
+	b.current_chain.size.to_s
+end
+
+get '/other_blocks' do
+	b.get_other_blocks.to_s
+end
+
+get '/register' do
+	b.add_node(params["node"])
+end
+
+get '/my_nodes' do
+  b.total_nodes.to_s
+end
 

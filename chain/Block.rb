@@ -1,5 +1,6 @@
 require 'securerandom'
 require 'digest'
+require 'httparty'
 
 class BlockChain
 
@@ -8,6 +9,7 @@ class BlockChain
 		@chain = []
 		@transaction =[]
 		@wallet = {}
+		@node = []
 	end
 
 	def make_a_wallet
@@ -62,7 +64,6 @@ class BlockChain
 		@chain << block
 	end
 
-
 	def current_chain
 		@chain
 	end
@@ -74,4 +75,19 @@ class BlockChain
 	def last_block
 		@chain[-1]
 	end
+
+	def get_other_blocks
+		HTTParty.get("http://localhost:4568/total_blocks").body
+	end
+
+	def add_node(node)
+		@node << node
+		node
+	end
+
+	def total_nodes
+		@node
+	end
 end
+
+
