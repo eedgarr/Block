@@ -54,5 +54,7 @@ end
 
 get '/get_blocks' do
   new_blocks = JSON.parse(params["blocks"])
-  puts new_blocks
+  b.add_new_blocks(new_blocks)
+  puts b.current_chain.to_json
+  b.current_chain.to_json
 end

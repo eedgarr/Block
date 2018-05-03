@@ -63,6 +63,7 @@ class BlockChain
 		} 
 		@transaction = []
 		@chain << block
+		nonce
 	end
 
 	def current_chain
@@ -77,11 +78,12 @@ class BlockChain
 		@chain[-1]
 	end
 
-	def get_other_blocks
+		def get_other_blocks
 		@node.each do |n|
 			other_blocks = HTTParty.get("http://localhost:" + n.to_s + "/total_blocks").body
 			if @chain.size < other_blocks.to_i
-				HTTParty.get("http://localhost:" + n.to_s + "/get_blocks?blocks=" + @chain.to_json)
+				full_block = HTTParty.get("http://localhost:" + n.to_s + "/get_blocks?blocks=" + @chain.to_json)
+				@chain = JSON.parse(full_block)
 			end
 		end
 	end
@@ -94,6 +96,12 @@ class BlockChain
 	def total_nodes
 		@node
 	end
-end
+
+	def add_new_blocks(new_blocks)
+		new_blocks.each do |d|
+			@chain << d
+		end
+	end
+end	
 
 
